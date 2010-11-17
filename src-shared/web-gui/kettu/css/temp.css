@@ -1,0 +1,56 @@
+#update_torrent .files {
+  list-style-type: none;
+}
+
+.statusString.error {
+  color: red;
+  border: 0px;
+  padding: 0px;
+  background-color: white;
+  margin: 0px;
+}
+
+.files_in_folders {
+  display: none;
+  margin-left: 10px;
+}
+
+ul#sorts {
+  display: none;
+}
+
+.arrow {
+  margin-left: 5px;
+  margin-right: 3px;
+}
+
+.files a {
+  text-decoration: none;
+}
+
+.priority_choice {
+  display: none;
+}
+
+.percent_done {
+  margin-left: 20px;
+}
+
+img.priority {
+  margin: 0px;
+  margin-left: 10px;
+  padding: 0px;
+}
+
+img.priority.compact {
+  margin: 0px;
+  padding: 0px;
+}
+
+.file_info img.priority.compact {
+  float: right;
+}
+
+.file_info:nth-child(even) {
+  background-color: #F9F9F9;
+}

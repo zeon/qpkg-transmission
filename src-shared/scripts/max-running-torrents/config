@@ -1,0 +1,14 @@
+# The maximum number of the active/downloading torrents
+MAX_ACTIVE=5
+
+# Username for Transmission RPC service
+RPC_USERNAME=admin
+
+# Password for Transmission RPC service
+RPC_PASSWORD=admin
+
+# Apply to only started torrents (alternative to ONLY_PAUSE_TORRENTS)
+ONLY_START_TORRENTS=1
+
+# Apply to only paused torrents (alternative to ONLY_START_TORRENTS)
+ONLY_PAUSE_TORRENTS=0

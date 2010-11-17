@@ -1,0 +1,26 @@
+# Enable/Disable the email notifier when a torrent download job is finished.
+ENABLE=0
+
+# Host name of the device running Transmission
+HOST=localhost
+
+# TCP port the Transmission daemon is listening on
+PORT=9091
+
+# Enable/Disable the RPC service of the Transmission daemon
+RPC_AUTH=1
+
+# Username used in the RPC service
+USER=admin
+
+# Password used in the RPC service
+PASS=admin
+
+# Specify the name of the sender you wish to see in the mail notification
+FROM=Torrent-checker
+
+# Specify the email address you wish to receive the notification mail
+MAILTO=your@mail.com
+
+# Specify the additional email addresses you wish to receive the notification mail
+MAILCC=
