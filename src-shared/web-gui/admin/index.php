@@ -115,9 +115,9 @@
 									<td align='center'>
 										<a href='.config/edit.php?lid=$lid&amp;cfg=email_notify&amp;file=scripts/email_notifier/config&amp;action=save' rev='$lb_size' rel='lightbox[conf2]'><img border='0' src='images/email.png' alt='' width='40'></a><br>
 									</td>
-									<td align='center'>
+									<!-- <td align='center'>
 										<a href='.config/edit.php?lid=$lid&amp;cfg=max_running_torrents&amp;file=scripts/max-running-torrents/config&amp;action=save' rev='$lb_size' rel='lightbox[conf3]'><img border='0' src='images/max_jobs.png' alt='' width='40'></a><br>
-									</td>
+									</td> -->
 									<td align='center'>
 										<a style='cursor: pointer;' onclick=\"javascript:  jQuery('#dialog_frontend').dialog('open');\"><img border='0' src='images/frontend.png' alt='' width='40'></a><br>
 									</td>
@@ -129,9 +129,9 @@
 									<td align='center'>						 
 										<span>"._MENU_EMAIL_NOTIFIER."</span>
 									</td>
-									<td align='center'>							 
+									<!-- <td align='center'>							 
 										<span>"._MENU_MAX_RUNNING_JOBS."</span>
-									</td>
+									</td> -->
 									<td align='center'>								 
 										<span>"._MENU_DOWNLOADS."</span>
 									</td>	
@@ -190,41 +190,61 @@
 		</div>
 	</div>
 	<div id='dialog_frontend' title='Frontend Downloads'>
-		<div id='frontend_logo'><img src='images/logo2.png' alt='Transmission Logo' /></div>
-		<h2 class='dialog_heading'>Transmission Remote GUI</h2>
-		<div class='dialog_message'>
-			<p>Transmission Remote GUI is a cross platform, fast and feature rich  front-end to control the Transmission torrent daemon remotely. It provide many more funcationalities then the built-in web front-end and is available for download from the links below. Choose the operating system you intend to use it on.</p>
-			<br /><p>version 2.1.1</p><br />
-			<div id='download_link'>
-				<a href='http://transmisson-remote-gui.googlecode.com/files/transgui-2.1.1-setup.exe'>Windows&nbsp;&nbsp;</a>|
-				<a href='http://transmisson-remote-gui.googlecode.com/files/transgui-2.1.1.dmg'>Mac OS X&nbsp;&nbsp;</a>|
-				<a href='http://transmisson-remote-gui.googlecode.com/files/transgui-2.1.1-i386-linux.zip'>Linux i386&nbsp;&nbsp;</a>|
-				<a href='http://transmisson-remote-gui.googlecode.com/files/transgui-2.1.1-x86_64-linux.zip'>Linux x86_64</a>
+		<h1>For PC</h1>
+		<div style='float: left; width: 370px;'>
+			<div id='frontend_logo'><img src='images/logo2.png' alt='Transmission Logo' /></div>
+			<h2 class='dialog_heading'>Transmission Remote GUI</h2>
+			<div class='dialog_message'>
+				<p>Transmission Remote GUI is a cross platform, fast and feature rich  front-end to control the Transmission torrent daemon remotely. It provide many more funcationalities then the built-in web front-end and is available for download from the links below. Choose the operating system you intend to use it on.</p>
+				<br /><p>version 2.2</p><br />
+				<div id='download_link'>
+					<a href='http://transmisson-remote-gui.googlecode.com/files/transgui-2.2-setup.exe'>Windows&nbsp;&nbsp;</a>|
+					<a href='http://transmisson-remote-gui.googlecode.com/files/transgui-2.2.dmg'>Mac OS X&nbsp;&nbsp;</a>|
+					<a href='http://transmisson-remote-gui.googlecode.com/files/transgui-2.2-i386-linux.zip'>Linux i386&nbsp;&nbsp;</a>|
+					<a href='http://transmisson-remote-gui.googlecode.com/files/transgui-2.2-x86_64-linux.zip'>Linux x86_64</a>
+				</div>
 			</div>
 		</div>
+		<div style='float: right; width: 370px;'>
+			<div id='frontend_logo'><img src='images/welcomefinish.png' alt='Transmission Logo' /></div>
+			<h2 class='dialog_heading'>Transmission Remote dotnet</h2>
+			<div class='dialog_message'>
+				<p>Transmission-remote-dotnet is a Windows remote client to the RPC interface of transmission-daemon, which is part of the Transmission BitTorrent client. The application is quite like uTorrent in appearance and currently supports almost all the RPC specification.</p>
+				<br /><p>version 3.24</p><br />
+				<div id='download_link'>
+					<a href='http://transmission-remote-dotnet.googlecode.com/files/transmission-remote-dotnet-3.24-installer.exe'>Windows</a>
+				</div>
+			</div>
+		</div>	
 		<hr style='width:95%; margin-bottom:20px;'>
-		<div id='frontend_logo'><img src='images/welcomefinish.png' alt='Transmission Logo' /></div>
-		<h2 class='dialog_heading'>Transmission Remote dotnet</h2>
-		<div class='dialog_message'>
-			<p>Transmission-remote-dotnet is a Windows remote client to the RPC interface of transmission-daemon, which is part of the Transmission BitTorrent client. The application is quite like uTorrent in appearance and currently supports almost all the RPC specification.</p>
-			<br /><p>version 3.23beta</p><br />
-			<div id='download_link'>
-				<a href='http://transmission-remote-dotnet.googlecode.com/files/transmission-remote-dotnet-3.23beta-installer.exe'>Windows</a>
+		<h1>For Mobile</h1>
+		<div style='float: left; width: 370px;'>
+			<div id='frontend_logo'><img src='images/logo3.png' alt='Transdroid Logo' /></div>
+			<h2 class='dialog_heading'>Transdroid - <font color='grey'>for Android Phone</font></h2> 
+			<div class='dialog_message'>				
+				<p>Transdroid is an Android remote client for your torrent application running on a server or home computer. Currently Transmission, uTorrent, Bittorrent, Deluge, Vuze and rTorrent are supported. It can show the active torrents, pause, resume or remove them and new torrents can be added via URL, RSS feed or using the integrated search.</p>
+				<br /><p>version 1.0.0 RC1</p><br />
+				<div id='download_link'>
+					<a href='http://transdroid.googlecode.com/files/transdroid-1.0.0-rc1.apk'>Android</a>
+				</div>
+				<img src='images/transdroid_qrcode.png' alt='Transdroid QR Code' style='float: left; margin: 10px 0 ; width: 120px; clear: both;'/>
+				<br />
+				<br />
 			</div>
 		</div>
-		<hr style='width:95%; margin-bottom:20px;'>
-		<div id='frontend_logo'><img src='images/logo3.png' alt='Transdroid Logo' /></div>
-		<h2 class='dialog_heading'>Transdroid - Remote torrent client for Android</h2>
-		<div class='dialog_message'>				
-			<p>Transdroid is an Android remote client for your torrent application running on a server or home computer. Currently Transmission, uTorrent, Bittorrent, Deluge, Vuze and rTorrent are supported. It can show the active torrents, pause, resume or remove them and new torrents can be added via URL, RSS feed or using the integrated search.</p>
-			<br /><p>version 0.21.0</p><br />
-			<div id='download_link'>
-				<a href='http://transdroid.googlecode.com/files/transdroid-0.21.0.apk'>Android</a>
+		<div style='float: right; width: 370px;'>
+			<div id='frontend_logo'><img src='images/transmission-remote.png' width='48' alt='Transdroid Logo' /></div>
+			<h2 class='dialog_heading'>Transmission Remote <font color='grey'>for Windows Mobile 7</font></h2>
+			<div class='dialog_message'>				
+				<p>Transmission Remote is a nonfree app to let you control Transmission remotely from a Windows Mobile 7 phone.</p>
+				<br /><p>version 1.0.0.0</p><br />
+				<div id='download_link'>
+					<a href='zune://navigate/?appID=70b6c169-78f6-df11-9264-00237de2db9e'>Window Mobile 7</a>
+				</div>				
+				<br />
+				<br />
 			</div>
-			<img src='images/transdroid_qrcode.png' alt='Transdroid QR Code' style='float: left; margin: 10px 0 ; clear: both;'/>
-			<br />
-			<br />
-		</div>
+		</div>		
 		
 	</div>
 	<div id='dialog_frontend_changer' title='Frontend Changer'>

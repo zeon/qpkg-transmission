@@ -48,7 +48,8 @@ find_base
 export LD_LIBRARY_PATH=${QPKG_DIR}/lib
 export EVENT_NOEPOLL=0
 
-USERNAME=transmission
+USERNAME=admin
+GROUPNAME=administrators
 TRANSMISSION_HOME="${QPKG_DIR}/conf"
 TRANSMISSION_WEB_HOME="${QPKG_DIR}/web"
 TRANSMISSION_ARGS="--blocklist --config-dir $TRANSMISSION_HOME --logfile /share/${DOWNLOAD_SHARE}/transmission/logs/debug.log"
@@ -95,6 +96,7 @@ create_links(){
 	done
 
 	if [[ "`uname -m`" = "armv5tejl" || "`uname -m`" = "armv5tel" ]]; then
+		export LD_LIBRARY_PATH=${QPKG_DIR}/lib
 		[ -f /usr/lib/libevent-1.4.so.2 ] || ln -sf ${QPKG_DIR}/lib/libevent-1.4.so.2.2.0 /usr/lib/libevent-1.4.so.2
 		[ -f /usr/lib/libssl.so.0.9.8 ] || ln -sf ${QPKG_DIR}/lib/libssl.so.0.9.8 /usr/lib/libssl.so.0.9.8
 		[ -f /usr/lib/libcrypto.so.0.9.8 ] || ln -sf ${QPKG_DIR}/lib/libcrypto.so.0.9.8 /usr/lib/libcrypto.so.0.9.8
@@ -133,24 +135,19 @@ change_permission() {
     if [ "$?" != "0" ]; then
 		addgroup transmission 2>/dev/null
 	fi	
-	chown -R ${USERNAME}.${USERNAME} ${QPKG_DIR}/conf
+	chown -R ${USERNAME}.${GROUPNAME} ${QPKG_DIR}/conf
 	chmod 666 ${QPKG_DIR}/scripts/email_notifier/config
 	chmod 666 ${QPKG_DIR}/scripts/max-running-torrents/config
 	chmod 666 ${QPKG_DIR}/conf/settings.json
 	chmod +x ${QPKG_DIR}/scripts/run_scripts.sh
-	chmod +x "${QPKG_DIR}/scripts/email_notifier/email_notifier.sh"
+	chmod +x ${QPKG_DIR}/scripts/email_notifier/email_notifier.sh
 }
 
 setup_email_notifier() {	
-	if [ -f ${QPKG_DIR}/scripts/email_notifier/config ]; then
-		/sbin/dos2unix -u ${QPKG_DIR}/scripts/email_notifier/config
-		/bin/chmod 666 ${QPKG_DIR}/scripts/email_notifier/config
-		. ${QPKG_DIR}/scripts/email_notifier/config 
-	fi
-
-	if [ "${ENABLE}" -eq "1" ]; then
+	if [ `/sbin/getcfg Main ENABLE -f ${QPKG_DIR}/scripts/email_notifier/config` -eq 1 ]; then
 		echo "Hooking to the run_scripts.sh ..."
-		echo -e "\n${QPKG_DIR}/scripts/email_notifier/email_notifier.sh" >> ${QPKG_DIR}/scripts/run_scripts.sh
+		grep email_notifier ${QPKG_DIR}/scripts/run_scripts.sh 1>/dev/null
+		[ "$?" != "0" ] && echo -e "${QPKG_DIR}/scripts/email_notifier/email_notifier.sh" >> ${QPKG_DIR}/scripts/run_scripts.sh
 	else
 		echo "Removing from the run_scripts.sh... "
 		grep email_notifier ${QPKG_DIR}/scripts/run_scripts.sh 1>/dev/null

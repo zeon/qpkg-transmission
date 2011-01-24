@@ -64,6 +64,7 @@
 					modal: true,
 					close: function(event, ui) { window.location = ''; }
 				});					
+				
 				jQuery('img.menu_class').click(function () {
 					jQuery('ul.the_menu').slideToggle('medium');
 				});
@@ -87,7 +88,6 @@
 						$('#'+selected).show();
 					});
 				});
-
 			});
 			
 			window.addEvent('domready', function() {

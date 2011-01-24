@@ -60,6 +60,7 @@ Transmission.prototype =
 		$('#turtle_button').bind('click', function(e){ tr.toggleTurtleClicked(e); return false; });
 		$('#prefs_tab_general_tab').click(function(e){ changeTab(this, 'prefs_tab_general') });
 		$('#prefs_tab_speed_tab').click(function(e){ changeTab(this, 'prefs_tab_speed') });
+        $('#torrent_upload_form').submit(function(){ $('#upload_confirm_button').click(); return false; });
 
 		if (iPhone) {
 			$('#inspector_close').bind('click', function(e){ tr.hideInspector(); });
@@ -1118,6 +1119,12 @@ Transmission.prototype =
 						$element.deselectMenuItem();
 					this.refreshDisplay( );
 				}
+				else if ($element[0].id == 'homepage') {
+					window.open('http://www.transmissionbt.com/');
+				}
+				else if ($element[0].id == 'tipjar') {
+					window.open('http://www.transmissionbt.com/donate.php');
+				}
 				break;
 
 			// Limit the download rate
@@ -1228,7 +1235,7 @@ Transmission.prototype =
 		var total_availability = 0;
 		var total_have = 0;
 		var total_size = 0;
-		var total_state = null;
+		var total_state = [ ];
 		var pieces = 'N/A';
 		var total_upload = 0;
 		var total_upload_peers = 0;
@@ -1304,10 +1311,11 @@ Transmission.prototype =
 			total_upload_peers   += t.peersGettingFromUs();
 			total_download_peers += t.peersSendingToUs();
 			total_availability   += t._sizeWhenDone - t._leftUntilDone + t._desiredAvailable;
-			if( total_state == null )
-				total_state = t.stateStr();
-			else if ( total_state.search ( t.stateStr() ) == -1 )
-				total_state += '/' + t.stateStr();
+
+			var s = t.stateStr();
+			if( total_state.indexOf( s ) == -1 )
+				total_state.push( s );
+
 			if( t._is_private )
 				have_private = true;
 			else
@@ -1324,7 +1332,7 @@ Transmission.prototype =
 		setInnerHTML( tab.size, torrents.length ? fmt.size( total_size ) : na );
 		setInnerHTML( tab.pieces, pieces );
 		setInnerHTML( tab.hash, hash );
-		setInnerHTML( tab.state, total_state );
+		setInnerHTML( tab.state, total_state.join('/') );
 		setInnerHTML( tab.download_speed, torrents.length ? fmt.speedBps( total_download_speed ) : na );
 		setInnerHTML( tab.upload_speed, torrents.length ? fmt.speedBps( total_upload_speed ) : na );
 		setInnerHTML( tab.uploaded, torrents.length ? fmt.size( total_upload ) : na );
@@ -1784,6 +1792,7 @@ Transmission.prototype =
 				$('input#torrent_upload_url').attr('value', '');
 				$('input#torrent_auto_start').attr('checked', $('#prefs_form #auto_start')[0].checked);
 				$('#upload_container').show();
+                $('#torrent_upload_url').focus();
 			if (!iPhone && Safari3) {
 				setTimeout("$('div#upload_container div.dialog_window').css('top', '0px');",10);
 			}

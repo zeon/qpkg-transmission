@@ -227,9 +227,15 @@ check_existing_install(){
 # Custom functions
 ##################################
 #
-change_download_share() {
-	$CMD_SED -i 's/XXXX/'${DOWNLOAD_SHARE}'/g' "${QPKG_DIR}/conf/settings.json"
+assign_folder_path() {
+	$CMD_SED -i 's/XXXX/'${DOWNLOAD_SHARE}'/g' ${QPKG_DIR}/conf/settings.json
+	TEMP=`echo $QPKG_DIR | cut -d "/" -f 3`
+	$CMD_SED -i 's/YYYY/\/share\/'${TEMP}'\/.qpkg\/Transmission/g' ${QPKG_DIR}/conf/settings.json
 }
+
+restart_apache(){
+	/etc/init.d/Qthttpd.sh restart 2>/dev/null 1>/dev/null
+}	
 #
 ##################################
 # Pre-install routine
@@ -245,8 +251,8 @@ pre_install(){
 ##################################
 #
 post_install(){
-	change_download_share
-	copy_qpkg_icons
+	assign_folder_path
+	restart_apache
 	link_start_stop_script		
 	register_qpkg
 }
@@ -267,6 +273,11 @@ pre_update()
 post_update()
 {
 	${CMD_RM} -rf /tmp/exclude
+	TMP=`${CMD_GETCFG} Transmission Web_Port -f /etc/config/qpkg.conf`
+	if [ "$TMP" = "9091" ]; then
+		${CMD_SED} -i '/Web_Port \= 9091/d' /etc/config/qpkg.conf
+	fi
+
 }
 #
 ##################################
@@ -316,19 +327,30 @@ install()
 		$CMD_SYNC
 		QPKG_INSTALL_MSG="${QPKG_NAME} ${QPKG_VER} has been installed in $QPKG_DIR."
 		$CMD_ECHO "$QPKG_INSTALL_MSG"
-		_exit 0
+		
+		QPKG_INSTALL_MSG="Now starting... "
+		$CMD_ECHO "$QPKG_INSTALL_MSG"
+		if [ -f /etc/init.d/transmission.sh ]; then
+			/etc/init.d/transmission.sh start
+			if [ $? != 0 ]; then
+				QPKG_INSTALL_MSG="${QPKG_NAME} failed to start!"
+				$CMD_ECHO "$QPKG_INSTALL_MSG"
+				_exit 1
+			else
+				QPKG_INSTALL_MSG="${QPKG_NAME} starts successfully!"
+				$CMD_ECHO "$QPKG_INSTALL_MSG"
+				exit 0
+			fi
+		else
+			QPKG_INSTALL_MSG="Installation error, transmission.sh not found!"
+			$CMD_ECHO "$QPKG_INSTALL_MSG"
+			_exit 1		
+		fi
 	else
 		QPKG_INSTALL_MSG="${QPKG_NAME} ${QPKG_VER} installation failed. ${QPKG_SOURCE_DIR}/${QPKG_SOURCE_FILE} file not found."
 		$CMD_ECHO "$QPKG_INSTALL_MSG"
 		_exit 1		
 	fi
-}
-
-copy_qpkg_icons()
-{
-        ${CMD_RM} -rf /home/httpd/RSS/images/${QPKG_NAME}.gif; ${CMD_CP} -af ${QPKG_DIR}/.qpkg_icon.gif /home/httpd/RSS/images/${QPKG_NAME}.gif
-        ${CMD_RM} -rf /home/httpd/RSS/images/${QPKG_NAME}_gray.gif; ${CMD_CP} -af ${QPKG_DIR}/.qpkg_icon_gray.gif /home/httpd/RSS/images/${QPKG_NAME}_gray.gif
-        ${CMD_RM} -rf /home/httpd/RSS/images/${QPKG_NAME}_80.gif; ${CMD_CP} -af ${QPKG_DIR}/.qpkg_icon_80.gif /home/httpd/RSS/images/${QPKG_NAME}_80.gif
 }
 
 ##### Main #####
@@ -338,5 +360,4 @@ $CMD_ECHO "$UPDATE_PB" > ${UPDATE_PROCESS}
 $CMD_SLEEP 5
 $CMD_SYNC
 install
-
 

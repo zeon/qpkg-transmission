@@ -1,4 +1,4 @@
-AuthName "Transmission Admin Restricted Access (Requires NAS admin a/c info)" 
+AuthName "Transmission Admin Restricted Access (Uses admin a/c in NAS)" 
 AuthType Basic 
 #	AuthUserFile /mnt/HDA_ROOT/rootfs_2_3_6/root/.htpasswd 
 AuthUserFile /mnt/HDA_ROOT/.config/shadow 

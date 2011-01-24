@@ -17,7 +17,7 @@
 
 // Common system variables
 	define("_APPS_NAME",		"Transmission Admin Center");
-	define("_COPYRIGHTS",		"Transmission Admin Center v0.1 by QNAPAndy.<br>All rights reserved for its respective owners.");
+	define("_COPYRIGHTS",		"Transmission Admin Center v0.2 by QNAPAndy.<br>All rights reserved for its respective owners.");
 	define("PWD_MIN_LENGHT",	5);			// Minimum number of password characters
 	define("DOC_TYPE",			"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1-transitional.dtd\">");
 	$lb_size = "width=800, height=450";		// Slimbox dimensions

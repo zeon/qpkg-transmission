@@ -1,7 +1,7 @@
 This QPKG contains the source files of applications obtained/downloaded from the URLs shown below:
 
-- Transmission v2.10
-http://download.m0k.org/transmission/files/transmission-2.10.tar.bz2
+- Transmission v2.13
+http://download.m0k.org/transmission/files/transmission-2.13.tar.bz2
 
 Below's the configuration switch used to build each library as well as its source origin
 
