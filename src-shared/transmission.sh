@@ -225,9 +225,9 @@ do_start()
     #   0 if daemon has been started
     #   1 if daemon was already running
     #   2 if daemon could not be started
-    start-stop-daemon --chuid $USERNAME --start --pidfile $PIDFILE --make-pidfile --exec $DAEMON --background --test -- -f $TRANSMISSION_ARGS > /dev/null || return 1
+    ${QPKG_DIR}/bin/start-stop-daemon --chuid $USERNAME --start --pidfile $PIDFILE --make-pidfile --exec $DAEMON --background --test -- -f $TRANSMISSION_ARGS > /dev/null || return 1
     
-    start-stop-daemon --chuid $USERNAME --start --pidfile $PIDFILE --make-pidfile --exec $DAEMON --background -- -f $TRANSMISSION_ARGS || return 2
+    ${QPKG_DIR}/bin/start-stop-daemon --chuid $USERNAME --start --pidfile $PIDFILE --make-pidfile --exec $DAEMON --background -- -f $TRANSMISSION_ARGS || return 2
 }
     
 #
@@ -240,7 +240,7 @@ do_stop()
         #   1 if daemon was already stopped
         #   2 if daemon could not be stopped
         #   other if a failure occurred
-        /usr/bin/start-stop-daemon --stop --quiet --retry=TERM/10/KILL/5 --pidfile $PIDFILE --name $NAME
+        ${QPKG_DIR}/bin/start-stop-daemon --stop --quiet --retry=TERM/10/KILL/5 --pidfile $PIDFILE --name $NAME
         RETVAL="$?"
         [ "$RETVAL" = 2 ] && return 2
 
@@ -251,7 +251,7 @@ do_stop()
         # needed by services started subsequently.  A last resort is to
         # sleep for some time.
 
-        /usr/bin/start-stop-daemon --stop --quiet --oknodo --retry=0/30/KILL/5 --exec $DAEMON
+        ${QPKG_DIR}/bin/start-stop-daemon --stop --quiet --oknodo --retry=0/30/KILL/5 --exec $DAEMON
         [ "$?" = 2 ] && return 2
 
         # Many daemons don't delete their pidfiles when they exit.
